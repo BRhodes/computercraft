@@ -1,0 +1,33 @@
+local tArgs = { ... }
+if #tArgs ~= 2 then
+    io.write("Usage: wall <length> <height>")
+    return
+end
+
+length = tonumber(tArgs[1])
+height = tonumber(tArgs[2])
+
+io.write("Length is " .. length .. ".\n")
+io.write("Height is " .. height .. ".\n")
+
+moved = 1
+while (moved < length) do
+    
+-- loop while forward
+
+    -- dig down
+    -- pillar up
+    -- build wall
+    -- move forward
+    forward()
+    moved = moved + 1
+end
+
+local function foward()
+    -- placeholder
+    turtle.forward()
+
+end
+
+
+--** fuel/deposit/withdraw as neccessary
