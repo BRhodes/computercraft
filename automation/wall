@@ -19,6 +19,9 @@ function main()
 
         dug = dig()
         pillar(dug + height)
+        if need_refuel() then
+            refuel()
+        end
 --        wall()    
 
         moved = moved + 1
@@ -75,7 +78,7 @@ end
 function deposit()
     io.write("function deposit()\n")
     last_slot = turtle.getSelectedSlot()
-    turtle.select(14)
+    turtle.select(15)
     placeUp()
     i = 1
     while (i <= 12) do
@@ -103,12 +106,20 @@ function restock()
     turtle.select(last_slot)
 end
 
+function need_refuel()
+    if turtle.getFuelLevel() / turtle.getFuelLimit() < .5 then
+        return 1
+    else
+        return 0
+    end
+end
+
 -- Restock Fuel 
 function refuel()
     io.write("function refuel()\n")
     last_slot = turtle.getSelectedSlot()
 
-    turtle.select(15)
+    turtle.select(16)
     placeUp()
     turtle.suckUp()
     turtle.refuel(turtle.getItemCount())
