@@ -3,7 +3,7 @@ args = { ... }
 function main()
     io.write("function main()\n")
     if #args ~= 2 then
-        io.write("Usage: wall <length> <height>")
+        io.write("Usage: wall <length> <height>\n")
         return
     end
 
@@ -53,7 +53,7 @@ end
 
 -- Pillar back x blocks
 function pillar(up)
-    io.write("function pillar(up)")
+    io.write("function pillar(up)\n")
     built = 0
     turtle.select(13)
     while built < up do
