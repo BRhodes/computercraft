@@ -71,7 +71,7 @@ function pillar(up)
     while built < up do
         if turtle.up() then
             while not turtle.placeDown() do
-                turtle.restock()
+                restock()
             end
             built = built + 1
         else
