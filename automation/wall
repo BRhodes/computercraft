@@ -39,6 +39,7 @@ function forward()
         if not turtle.down() then
             turtle.attackDown()
         end
+        s, d = turtle.inspectDown()
     end
 end
 
