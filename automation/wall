@@ -37,7 +37,7 @@ function dig()
     down = 0
     s, d = turtle.inspectDown()
     turtle.digDown()
-    while not (s and d[name] == "minecraft:bedrock") do
+    while not (s and d["name"] == "minecraft:bedrock") do
         while turtle.down() do
             down = down + 1
             turtle.digDown()
@@ -57,13 +57,14 @@ function pillar(up)
     built = 0
     turtle.select(13)
     while built < up do
-        while turtle.up() do
+        if turtle.up() then
             while not turtle.placeDown() do
                 turtle.restock()
             end
             built = built + 1
+        else
+            turtle.attackUp()
         end
-        turtle.attackUp()
     end
 end
 
