@@ -1,0 +1,18 @@
+local args = { ... }
+if #args ~= 1 then
+    io.write("Usage: forward <length>\n")
+    return
+end
+
+max = tonumber(args[1])
+
+local i = 0
+while (i < max) and turtle.forward() do
+    s, d = turtle.inspectDown()
+    while not s do
+        turtle.down()
+        s, d = turtle.inspectDown()
+    end
+    i = i + 1
+end
+

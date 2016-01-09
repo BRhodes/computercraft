@@ -1,13 +1,13 @@
 local args = { ... }
 if #args ~= 1 then
-    io.write("Usage: down <length>\n")
+    io.write("Usage: forward <length>\n")
     return
 end
 
 max = tonumber(args[1])
 
 local i = 0
-while (i < max) and turtle.down() do
+while (i < max) and turtle.forward() do
     i = i + 1
 end
 
