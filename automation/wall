@@ -70,7 +70,11 @@ function pillar(up)
     turtle.select(13)
     while built < up do
         if turtle.up() then
+            
             while not turtle.placeDown() do
+                turtle.attackDown()
+            end
+            while turtle.getItemCount() < 5 do
                 restock()
             end
             built = built + 1
@@ -78,6 +82,7 @@ function pillar(up)
             turtle.attackUp()
         end
     end
+    restock()
 end
 
 -- Deposit all of the mined materials
@@ -113,7 +118,9 @@ function restock()
 end
 
 function need_refuel()
-    if turtle.getFuelLevel() / turtle.getFuelLimit() < .5 then
+    io.write("function need_refuel()\n")
+    fl = turtle.getFuelLevel() / turtle.getFuelLimit()
+    if fl < .5 then
         return 1
     else
         return 0
