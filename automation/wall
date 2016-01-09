@@ -58,11 +58,21 @@ end
 
 -- Restock Build Material
 function restock()
+    last_slot = turtle.getSelectedSlot()
+
+    turtle.select(14)
+    turtle.placeUp()
+    turtle.suckUp()
+    turtle.transferTo(1)
+    turtle.dropUp()
+    turtle.digUp()
+
+    turtle.select(last_slot)
 end
 
 -- Restock Fuel 
 function refuel()
-    last_slot = turtle.getSelectSlot()
+    last_slot = turtle.getSelectedSlot()
 
     turtle.select(15)
     turtle.placeUp()
