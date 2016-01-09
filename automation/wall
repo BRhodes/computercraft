@@ -73,6 +73,7 @@ function pillar(up)
             
             while not turtle.placeDown() do
                 turtle.attackDown()
+                turtle.digDown()
             end
             while turtle.getItemCount() < 5 do
                 restock()
@@ -80,6 +81,7 @@ function pillar(up)
             built = built + 1
         else
             turtle.attackUp()
+            turtle.digUp()
         end
     end
     restock()
@@ -119,11 +121,14 @@ end
 
 function need_refuel()
     io.write("function need_refuel()\n")
-    fl = turtle.getFuelLevel() / turtle.getFuelLimit()
-    if fl < .5 then
-        return 1
+    limit = turtle.getFuelLimit()
+    cur = turtle.getFuelLevel()
+    needed = limit - cur
+
+    if needed > 5120 then
+        return true
     else
-        return 0
+        return false
     end
 end
 
