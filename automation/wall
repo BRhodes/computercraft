@@ -1,4 +1,4 @@
-local args = { ... }
+args = { ... }
 
 function main()
     if #args ~= 2 then
@@ -16,9 +16,9 @@ function main()
     while (moved < length) do
         forward()
 
-        dig()
-        pillar()
-        wall()    
+        dug = dig()
+        pillar(dug + height)
+--        wall()    
 
         moved = moved + 1
     end
@@ -31,21 +31,41 @@ end
 
 -- Dig Down to bedrock
 function dig()
+    down = 0
+    s, d = turtle.inspectDown()
+    while not (s and d[name] == "minecraft:bedrock") do
+        while turtle.down() do
+            down = down + 1
+            turtle.digDown()
+            if turtle.getItemCount(12) > 0 then
+                deposit()
+            end
+        end
+        turtle.attackDown()
+    end
+    return down
 end
 
--- Pillar back up to surface
-function pillar()
-end
-
--- Build a wall of hieght x on the surface
-function wall()
+-- Pillar back x blocks
+function pillar(up)
+    built = 0
+    turtle.select(13)
+    while built < up do
+        while turtle.up() do
+            while not turtle.placeDown() do
+                turtle.restock()
+            end
+            built = built + 1
+        end
+        turtle.attackUp()
+    end
 end
 
 -- Deposit all of the mined materials
 function deposit()
     last_slot = turtle.getSelectedSlot()
     turtle.select(14)
-    turtle.placeUp()
+    placeUp()
     i = 1
     while (i <= 12) do
         turtle.select(i)
@@ -61,9 +81,9 @@ function restock()
     last_slot = turtle.getSelectedSlot()
 
     turtle.select(14)
-    turtle.placeUp()
+    placeUp()
     turtle.suckUp()
-    turtle.transferTo(1)
+    turtle.transferTo(13)
     turtle.dropUp()
     turtle.digUp()
 
@@ -75,7 +95,7 @@ function refuel()
     last_slot = turtle.getSelectedSlot()
 
     turtle.select(15)
-    turtle.placeUp()
+    placeUp()
     turtle.suckUp()
     turtle.refuel(turtle.getItemCount())
     turtle.digUp()
@@ -83,7 +103,12 @@ function refuel()
     turtle.select(last_slot)
 end
 
---main()
-deposit()
+function placeUp()
+    s = turtle.placeUp()
+    while not s do
+        turtle.attackUp()
+        s = turtle.placeUp()
+    end
+end
 
-
+main()
