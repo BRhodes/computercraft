@@ -1,7 +1,7 @@
 args = { ... }
 
 function main()
-    io.write("function main()")
+    io.write("function main()\n")
     if #args ~= 2 then
         io.write("Usage: wall <length> <height>")
         return
@@ -27,15 +27,16 @@ end
 
 -- Move forward one block, climb/descend as neccasary
 function forward()
-    io.write("function forward()")
+    io.write("function forward()\n")
     turtle.forward()
 end
 
 -- Dig Down to bedrock
 function dig()
-    io.write("function dig()")
+    io.write("function dig()\n")
     down = 0
     s, d = turtle.inspectDown()
+    turtle.digDown()
     while not (s and d[name] == "minecraft:bedrock") do
         while turtle.down() do
             down = down + 1
@@ -67,7 +68,7 @@ end
 
 -- Deposit all of the mined materials
 function deposit()
-    io.write("function deposit()")
+    io.write("function deposit()\n")
     last_slot = turtle.getSelectedSlot()
     turtle.select(14)
     placeUp()
@@ -83,7 +84,7 @@ end
 
 -- Restock Build Material
 function restock()
-    io.write("function restock()")
+    io.write("function restock()\n")
     last_slot = turtle.getSelectedSlot()
 
     turtle.select(14)
@@ -98,7 +99,7 @@ end
 
 -- Restock Fuel 
 function refuel()
-    io.write("function refuel()")
+    io.write("function refuel()\n")
     last_slot = turtle.getSelectedSlot()
 
     turtle.select(15)
@@ -111,7 +112,7 @@ function refuel()
 end
 
 function placeUp()
-    io.write("function placeUp()")
+    io.write("function placeUp()\n")
     s = turtle.placeUp()
     while not s do
         turtle.attackUp()
