@@ -32,8 +32,13 @@ end
 function forward()
     io.write("function forward()\n")
     while not turtle.forward() do
+        turtle.up()
     end
-    while turtle.down() do
+    s, d = turtle.inspectDown()
+    while not s do
+        if not turtle.down() then
+            turtle.attackDown()
+        end
     end
 end
 
