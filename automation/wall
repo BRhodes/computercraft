@@ -28,7 +28,10 @@ end
 -- Move forward one block, climb/descend as neccasary
 function forward()
     io.write("function forward()\n")
-    turtle.forward()
+    while not turtle.forward() do
+    end
+    while turtle.down() do
+    end
 end
 
 -- Dig Down to bedrock
